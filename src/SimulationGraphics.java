@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
-public class SimulationGraphics extends JComponent {
+public class SimulationGraphics extends JPanel {
 
     private int width;
     private int height;
@@ -17,11 +17,11 @@ public class SimulationGraphics extends JComponent {
         this.width = width;
         this.cellW = cellW;
         this.cellH = cellH;
+        this.setPreferredSize(new Dimension(width,height));
 
     }
 
-    private void generateGrass(Graphics2D graphics2D) {
-        int grassCount = 3;
+    private void generateGrass(Graphics2D graphics2D,int grassCount) {
         int verticalCount = (int) Math.floor((double) height / cellH);
         int horizontalCount = (int) Math.floor((double) width / cellW);
         for (int i = 0; i < grassCount; i++) {
@@ -42,7 +42,7 @@ public class SimulationGraphics extends JComponent {
         Rectangle2D r = new Rectangle2D.Double(0, 0, width, height);
         g2d.setColor(new Color(187, 158, 158));
         g2d.fill(r);
-        generateGrass(g2d);
+        generateGrass(g2d,20);
 
 //        g2d.setColor(new Color(255, 0, 0));
 //        generateGrass(g2d);
