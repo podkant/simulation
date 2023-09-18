@@ -15,6 +15,7 @@ public class SimulationMap extends JFrame {
         this.mapWidth = mapWidth;
         this.cellH=cellH;
         this.cellW=cellW;
+        //this.setSize(mapWidth,mapHeight+200);
 
         panel =new SimulationGraphics(mapWidth,mapHeight,cellW,cellH);
         this.add(panel);
