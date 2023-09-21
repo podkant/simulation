@@ -18,13 +18,14 @@ public class Map {
         map.put(coordinates,entity);
     }
 
-//    public  getEntry(Coordinates coordinates) {
-//
-//        for ( : map.entrySet()){
-//            return map.get(coordinates);
-//        }
-//
-//    }
+    public boolean containsKey(Coordinates coordinates){
+        for (java.util.Map.Entry<Coordinates, Entity> entry : map.entrySet()) {
+            if (entry.getKey()==null ? coordinates==null :entry.getKey().equals(coordinates)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public HashMap<Coordinates, Entity> getMap(){
         return map;

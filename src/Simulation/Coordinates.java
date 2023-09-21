@@ -7,14 +7,20 @@ public class Coordinates {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj==this) {
+        if (obj == this) {
             return true;
         }
-        if (!(obj instanceof Coordinates)){
+        if (!(obj instanceof Coordinates)) {
             return false;
         }
-        Coordinates c=(Coordinates) obj;
+        Coordinates c = (Coordinates) obj;
         return width == c.width && height == c.height;
+    }
+
+    @Override
+    public int hashCode() {
+        return width * 31 + height;
+
     }
 
     public Coordinates(int width, int height) {
