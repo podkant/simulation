@@ -4,8 +4,11 @@ import entity.Creatures.Creature;
 
 public class Herbivore extends Creature {
 
-    protected Herbivore(int speed, int heathPoints) {
+
+    public Herbivore(int speed, int heathPoints) {
         super(speed, heathPoints);
+        this.icon="\uD83D\uDC30";
+
     }
 
     @Override

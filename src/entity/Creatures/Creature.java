@@ -3,12 +3,16 @@ package entity.Creatures;
 import entity.Entity;
 
 public abstract class Creature extends Entity {
-    final int speed;
-    final int heathPoints;
+    public  int speed;
+    public  int heathPoints;
+    public String icon;
 
-    protected Creature(int speed, int heathPoints) {
+
+    public Creature(int speed, int heathPoints) {
+        this.icon=super.icon;
         this.speed = speed;
         this.heathPoints = heathPoints;
+
     }
 
     public abstract void makeMove();

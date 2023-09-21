@@ -3,7 +3,7 @@ package entity.terrains;
 import entity.Entity;
 
 public class Tree extends Entity {
-    public void initTree(){
-
+    public Tree() {
+        this.icon="\uD83C\uDF33";
     }
 }

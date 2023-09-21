@@ -4,9 +4,10 @@ import entity.Creatures.Creature;
 
 public class Predator extends Creature {
     public int attackPower;
-    protected Predator(int speed, int heathPoints,int attackPower) {
+    public Predator(int speed, int heathPoints,int attackPower) {
         super(speed, heathPoints);
         this.attackPower=attackPower;
+        this.icon="\uD83E\uDD81";
     }
 
     @Override
