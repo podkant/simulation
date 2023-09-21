@@ -11,6 +11,7 @@ public class StartSimulation {
         Map thisMap = new Map();
         thisMap.setHSize(60);
         thisMap.setWSize(50);
+
 //        if (thisMap.map.get(null) ==null){
 //            System.out.println("is null");
 //        }
