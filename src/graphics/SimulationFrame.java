@@ -1,3 +1,5 @@
+package graphics;
+
 import javax.swing.*;
 
 public class SimulationFrame extends JFrame {
@@ -8,7 +10,7 @@ public class SimulationFrame extends JFrame {
 
     SimulationPanel panel;
 
-    SimulationFrame(int mapWidth, int mapHeight, int cellW, int cellH) {
+    public SimulationFrame(int mapWidth, int mapHeight, int cellW, int cellH) {
         this.mapHeight = mapHeight;
         this.mapWidth = mapWidth;
         this.cellH=cellH;

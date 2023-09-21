@@ -1,4 +1,8 @@
-public abstract class Creature extends Entity{
+package entity.Creatures;
+
+import entity.Entity;
+
+public abstract class Creature extends Entity {
     final int speed;
     final int heathPoints;
 
