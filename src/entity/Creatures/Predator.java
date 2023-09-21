@@ -12,9 +12,8 @@ public class Predator extends Creature {
 
     @Override
     public void makeMove() {
-        System.out.println("entity.Creatures.Predator is moving "+speed);
+        System.out.println(icon+" is moving "+speed);
+        System.out.println(icon+" is attacking power"+attackPower);
     }
-    public void attack(){
-        System.out.println("entity.Creatures.Predator is attacking power"+attackPower);
-    }
+
 }
