@@ -8,6 +8,7 @@ public class Map {
     private int hSize;
     private int wSize;
 
+
     private HashMap <Coordinates, Entity> map = new HashMap<>();
 
 

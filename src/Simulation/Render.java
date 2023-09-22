@@ -25,7 +25,7 @@ public class Render {
                     if (map.containsKey(coordinates)) {
                         sb.append(map.getMap().get(coordinates).icon);
                     } else {
-                        sb.append("_");
+                        sb.append("\uD83C\uDF2B\uFE0F");
                     }
             }
             sb.append("\n");

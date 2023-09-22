@@ -3,8 +3,12 @@ package Simulation;
 import Simulation.Actions.Actions;
 import entity.Creatures.Herbivore;
 import entity.Creatures.Predator;
+import entity.terrains.Grass;
 import entity.terrains.Rock;
 import entity.terrains.Tree;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StartSimulation {
 
@@ -18,18 +22,37 @@ public class StartSimulation {
 
         Actions actions = new Actions(thisMap);
 
-        Herbivore herbivore=new Herbivore(10,100);
-        Predator predator = new Predator(15, 50,25);
-        Tree tree = new Tree();
-        Rock rock =new Rock();
+        List<Herbivore> herbivoreList =new ArrayList<>();
+        List<Predator> predatorList =new ArrayList<>();
+        List<Tree> treeList =new ArrayList<>();
+        List<Rock> rockList =new ArrayList<>();
+        List<Grass> grassList =new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            herbivoreList.add(new Herbivore(10,100));
+        }
 
-        actions.initializeEntity(rock,5);
-        actions.initializeEntity(tree,5);
-        actions.initializeEntity(herbivore,2);
-        actions.initializeEntity(predator,1);
+        for (int i = 0; i < 1; i++) {
+            predatorList.add(new Predator(15, 50,25));
+        }
+        for (int i = 0; i < 5; i++) {
+            treeList.add(new Tree());
+        }
+        for (int i = 0; i < 5; i++) {
+            rockList.add(new Rock());
+        }
+        for (int i = 0; i < 20; i++) {
+            grassList.add(new Grass());
+        }
+
+
+        actions.initializeEntity(herbivoreList);
+        actions.initializeEntity(predatorList);
+        actions.initializeEntity(grassList);
+        actions.initializeEntity(treeList);
+        actions.initializeEntity(rockList);
 
         Render render =new Render(thisMap);
-        Tree tree1 = new Tree();
+
         System.out.println( render.renderMap());
 //        System.out.println(herbivore.icon);
 //        System.out.println(predator.icon);
