@@ -1,6 +1,8 @@
 package Simulation;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Pathfinding {
 
@@ -8,27 +10,55 @@ public class Pathfinding {
     int maxCol;
 
     Map map;
-    Node[][] node = new Node[maxCol][maxRow];
-    Node startNode, currentNode, goalNode;
-    ArrayList<Node> openList= new ArrayList<>();
-    ArrayList<Node> closedList= new ArrayList<>();
+    private Node[][] node ;
+    private Node startNode, currentNode, goalNode;
+    private ArrayList<Node> openList= new ArrayList<>();
+    private ArrayList<Node> closedList= new ArrayList<>();
+    private Queue<Coordinates> track = new LinkedList<>();
 
     boolean GoalReached = false;
     public Pathfinding(Map map) {
         this.map = map;
         this.maxRow=map.getHSize();
         this.maxCol= map.getWSize();
-        setAllNodesCost();
-
+        node = new Node[maxCol][maxRow];
+//        int col=0;
+//        int row=0;
+//        while (col < maxCol && row < maxRow){
+//            node[col][row]=new Node(new Coordinates(col,row));
+//            col++;
+//            if (col==maxCol){
+//                col=0;
+//                row++;
+//            }
+//        }
+        for (int i = 0; i < maxCol; i++) {
+            for (int j = 0; j < maxRow; j++) {
+                node[i][j]=new Node(new Coordinates(i,j));
+            }
+        }
+    }
+    private void setAllNodesCost (){
+        for (int i = 0; i < maxCol; i++) {
+            for (int j = 0; j < maxRow; j++) {
+                getCost(node[i][j]);
+            }
+        }
 
     }
     public void setStartNode(Coordinates coordinates) {
         startNode = node[coordinates.width][coordinates.height];
         startNode.setAsStart();
+        currentNode=startNode;
     }
     public void setGoalNode(Coordinates coordinates) {
         node[coordinates.width][coordinates.height].setAsGoal();
         goalNode = node[coordinates.width][coordinates.height];
+    }
+    public void setSolidNode(Coordinates coordinates){
+        node[coordinates.width][coordinates.height].setAsSolid();
+
+
     }
     private void getCost(Node node) {
         //G cost
@@ -42,17 +72,12 @@ public class Pathfinding {
         //F cost
         node.fCost= node.gCost+node.hCost;
     }
-    private void setAllNodesCost (){
-        for (int i = 0; i < maxCol; i++) {
-            for (int j = 0; j < maxRow; j++) {
-                getCost(node[i][j]);
-            }
-        }
 
-    }
 
     public void search(){
-        while (!GoalReached && !openList.isEmpty()) {
+
+        setAllNodesCost();
+        while (!GoalReached ) {
             int col = currentNode.x;
             int row = currentNode.y;
             currentNode.setAsClosed();
@@ -64,10 +89,10 @@ public class Pathfinding {
             if (col>0){
                 openNode(node[col-1][row]);
             }
-            if (row<maxRow){
+            if (row+1 < maxRow){
                 openNode(node[col][row+1]);
             }
-            if (col<maxCol){
+            if (col+1 < maxCol){
                 openNode(node[col+1][row]);
             }
 
@@ -90,6 +115,11 @@ public class Pathfinding {
             currentNode=openList.get(bestNodeIndex);
             if (currentNode==goalNode){
                 GoalReached=true;
+                backtrackPath();
+            }
+            if (openList.isEmpty()){
+                System.out.println("failed to find path");
+                break;
             }
         }
 
@@ -102,4 +132,22 @@ public class Pathfinding {
         }
     }
 
+    private void backtrackPath() {
+        Node current = goalNode;
+        StringBuilder stringBuilder=new StringBuilder("Track is: ");
+        while  (current!=startNode){
+            current=current.parent;
+            if (current != startNode) {
+                track.add(new Coordinates(current.x,current.y));
+                stringBuilder.append(current.x).append("_").append(current.y).append(" ");
+            }
+        }
+        System.out.println(stringBuilder);
+
+    }
+
+    public Queue<Coordinates> getTrack() {
+        return track;
+
+    }
 }

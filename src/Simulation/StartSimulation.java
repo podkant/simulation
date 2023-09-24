@@ -8,6 +8,7 @@ import entity.terrains.Rock;
 import entity.terrains.Tree;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class StartSimulation {
@@ -55,27 +56,27 @@ public class StartSimulation {
 
         System.out.println( render.renderMap());
         Pathfinding pathfinding = new Pathfinding(thisMap);
-        pathfinding.setStartNode(new Coordinates(1,3));
-        pathfinding.setGoalNode(new Coordinates(9,10));
+        pathfinding.setStartNode(new Coordinates(0,2));
+        pathfinding.setGoalNode(new Coordinates(8,7));
+        pathfinding.setSolidNode(new Coordinates(8,2));
+        pathfinding.setSolidNode(new Coordinates(8,3));
+        pathfinding.setSolidNode(new Coordinates(8,4));
+        pathfinding.setSolidNode(new Coordinates(8,5));
+        pathfinding.setSolidNode(new Coordinates(8,6));
+        pathfinding.setSolidNode(new Coordinates(7,6));
+        pathfinding.setSolidNode(new Coordinates(7,7));
+        pathfinding.setSolidNode(new Coordinates(6,7));
+        pathfinding.setSolidNode(new Coordinates(6,8));
         pathfinding.search();
-//        System.out.println(herbivore.icon);
-//        System.out.println(predator.icon);
-//        System.out.println(tree.icon);
-//        System.out.println(rock.icon);
-//        herbivore.makeMove();
 
 
-
-//        if (thisMap.map.get(null) ==null){
-//            System.out.println("is null");
+//Iteration throw queue
+//        Iterator<Coordinates> iterator = pathfinding.getTrack().iterator();
+//        while(iterator.hasNext()){
+//            Coordinates iter = iterator.next();
+//            int trackWidth = iter.width;
+//            int trackHeight = iter.height;
 //        }
-
-//       entity.Creatures.Herbivore herbivore=new entity.Creatures.Herbivore(10,100);
-//       herbivore.makeMove();
-//
-//       entity.Creatures.Predator predator = new entity.Creatures.Predator(20,40,50);
-//       predator.makeMove();
-//       predator.attack();
 
     }
 }
