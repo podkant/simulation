@@ -3,6 +3,7 @@ package Simulation.Actions;
 import Simulation.Coordinates;
 import Simulation.Map;
 import entity.Entity;
+import entity.terrains.Ground;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,5 +55,16 @@ public class Actions {
 
     }
 
+    public void fillEmptyCellsWithGround (){
+        for (int i = 0; i < map.getWSize(); i++) {
+            for (int j = 0; j < map.getHSize(); j++) {
+                Coordinates coordinates = new Coordinates(i,j);
+                if (!map.containsKey(coordinates)){
+                    map.addEntityToMap(coordinates,new Ground());
+                }
+            }
+
+        }
+    }
 
 }

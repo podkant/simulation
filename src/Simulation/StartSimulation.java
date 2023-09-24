@@ -50,7 +50,7 @@ public class StartSimulation {
         actions.initializeEntity(grassList);
         actions.initializeEntity(treeList);
         actions.initializeEntity(rockList);
-
+        actions.fillEmptyCellsWithGround();
         Render render =new Render(thisMap);
 
         System.out.println( render.renderMap());
