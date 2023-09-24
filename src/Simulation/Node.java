@@ -2,6 +2,7 @@ package Simulation;
 
 public class Node {
     Node parent;
+
     int x;
     int y;
     int gCost;
@@ -9,6 +10,10 @@ public class Node {
     int fCost;
     boolean start;
     boolean goal;
+    boolean solid;
+    boolean open;
+    boolean checked;
+
 
     public Node(Coordinates coordinates) {
         this.x = coordinates.width;
@@ -19,7 +24,19 @@ public class Node {
         start=true;
     }
     public void setAsGoal(){
+
         goal=true;
+    }
+    public void setAsSolid(){
+        solid=true;
+    }
+
+    public void setAsOpen(){
+        open=true;
+    }
+    public void setAsClosed(){
+//        if (start==false && goal==false){   }
+        checked = true;
     }
 
 }

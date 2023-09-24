@@ -54,6 +54,10 @@ public class StartSimulation {
         Render render =new Render(thisMap);
 
         System.out.println( render.renderMap());
+        Pathfinding pathfinding = new Pathfinding(thisMap);
+        pathfinding.setStartNode(new Coordinates(1,3));
+        pathfinding.setGoalNode(new Coordinates(9,10));
+        pathfinding.search();
 //        System.out.println(herbivore.icon);
 //        System.out.println(predator.icon);
 //        System.out.println(tree.icon);
