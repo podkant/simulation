@@ -14,13 +14,16 @@ import java.util.List;
 
 public class StartSimulation {
 
+    public static final int MAX_ROW=10;
+    public static final int MAX_COL=10;
+
 
 
     public static void main(String[] args) {
 //        SimulationFrame simulationFrame = new SimulationFrame(302,502,10,10);
         Map thisMap = new Map();
-        thisMap.setHSize(10);
-        thisMap.setWSize(10);
+        thisMap.setHSize(MAX_ROW);
+        thisMap.setWSize(MAX_COL);
 
         Actions actions = new Actions(thisMap);
 
@@ -29,6 +32,7 @@ public class StartSimulation {
         List<Tree> treeList =new ArrayList<>();
         List<Rock> rockList =new ArrayList<>();
         List<Grass> grassList =new ArrayList<>();
+
 
         for (int i = 0; i < 1; i++) {
             herbivoreList.add(new Herbivore(10,100));
@@ -57,7 +61,8 @@ public class StartSimulation {
         Render render =new Render(thisMap);
 
         System.out.println( render.renderMap());
-        Pathfinding pathfinding = new Pathfinding(thisMap.getHSize(),thisMap.getWSize());
+
+        Pathfinding pathfinding = new Pathfinding(MAX_ROW,MAX_COL);
 
         pathfinding.setStartNode(new Coordinates(0,2));
         pathfinding.setGoalNode(new Coordinates(8,7));

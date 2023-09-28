@@ -23,6 +23,7 @@ public class Map {
             return map.get(coordinates);
         }
         else {
+            System.out.println("No such coordinates at map");
             throw new RuntimeException() ;
         }
     }
