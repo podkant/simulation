@@ -1,5 +1,8 @@
 package Simulation;
 
+import entity.terrains.Rock;
+import entity.terrains.Tree;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -9,7 +12,7 @@ public class Pathfinding {
     int maxRow;
     int maxCol;
 
-    Map map;
+
     private Node[][] node ;
     private Node startNode, currentNode, goalNode;
     private ArrayList<Node> openList= new ArrayList<>();
@@ -17,24 +20,17 @@ public class Pathfinding {
     private Queue<Coordinates> track = new LinkedList<>();
 
     boolean GoalReached = false;
-    public Pathfinding(Map map) {
-        this.map = map;
-        this.maxRow=map.getHSize();
-        this.maxCol= map.getWSize();
+    public Pathfinding(int maxRow,int maxCol) {
+
+        this.maxRow = maxRow;
+        this.maxCol = maxCol;
         node = new Node[maxCol][maxRow];
-//        int col=0;
-//        int row=0;
-//        while (col < maxCol && row < maxRow){
-//            node[col][row]=new Node(new Coordinates(col,row));
-//            col++;
-//            if (col==maxCol){
-//                col=0;
-//                row++;
-//            }
-//        }
+
         for (int i = 0; i < maxCol; i++) {
             for (int j = 0; j < maxRow; j++) {
-                node[i][j]=new Node(new Coordinates(i,j));
+                Coordinates coordinates = new Coordinates(i,j);
+                node[i][j]=new Node(coordinates);
+//                setSolidFromMap(coordinates);
             }
         }
     }
@@ -44,8 +40,14 @@ public class Pathfinding {
                 getCost(node[i][j]);
             }
         }
-
     }
+
+//    private void setSolidFromMap (Coordinates coordinates) {
+//        if ( (map.getEntityFromMap(coordinates) instanceof Rock) || (map.getEntityFromMap(coordinates) instanceof Tree)){
+//            setSolidNode(coordinates);
+////            System.out.println(coordinates.toString());
+//        }
+//    }
     public void setStartNode(Coordinates coordinates) {
         startNode = node[coordinates.width][coordinates.height];
         startNode.setAsStart();

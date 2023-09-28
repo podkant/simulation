@@ -3,6 +3,7 @@ package Simulation;
 import Simulation.Actions.Actions;
 import entity.Creatures.Herbivore;
 import entity.Creatures.Predator;
+import entity.Entity;
 import entity.terrains.Grass;
 import entity.terrains.Rock;
 import entity.terrains.Tree;
@@ -28,7 +29,8 @@ public class StartSimulation {
         List<Tree> treeList =new ArrayList<>();
         List<Rock> rockList =new ArrayList<>();
         List<Grass> grassList =new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
+
+        for (int i = 0; i < 1; i++) {
             herbivoreList.add(new Herbivore(10,100));
         }
 
@@ -55,7 +57,8 @@ public class StartSimulation {
         Render render =new Render(thisMap);
 
         System.out.println( render.renderMap());
-        Pathfinding pathfinding = new Pathfinding(thisMap);
+        Pathfinding pathfinding = new Pathfinding(thisMap.getHSize(),thisMap.getWSize());
+
         pathfinding.setStartNode(new Coordinates(0,2));
         pathfinding.setGoalNode(new Coordinates(8,7));
         pathfinding.setSolidNode(new Coordinates(8,2));

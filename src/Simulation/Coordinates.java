@@ -27,4 +27,12 @@ public class Coordinates {
         this.width = width;
         this.height = height;
     }
+
+    @Override
+    public String toString() {
+        return "Coordinates{" +
+                "col=" + width +
+                ", row=" + height +
+                '}';
+    }
 }

@@ -18,6 +18,14 @@ public class Map {
     public void addEntityToMap(Coordinates coordinates,Entity entity){
         map.put(coordinates,entity);
     }
+    public Entity getEntityFromMap(Coordinates coordinates){
+        if (map.containsKey(coordinates)){
+            return map.get(coordinates);
+        }
+        else {
+            throw new RuntimeException() ;
+        }
+    }
 
     public boolean containsKey(Coordinates coordinates){
         for (java.util.Map.Entry<Coordinates, Entity> entry : map.entrySet()) {
