@@ -46,6 +46,7 @@ public class Herbivore extends Creature {
             int distance = getCurrentCoordinates().distanceTo(grass.getCurrentCoordinates());
             if (distance < minDist) {
                 minDist = distance;
+                System.out.println(minDist);
                 setTargetCoordinates(grass.getCurrentCoordinates());
             }
         }

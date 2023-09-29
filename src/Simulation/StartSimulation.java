@@ -52,15 +52,16 @@ public class StartSimulation {
         }
 
 
-        actions.initializeEntity(herbivoreList);
-        actions.initializeEntity(predatorList);
-        actions.initializeEntity(grassList);
-        actions.initializeEntity(treeList);
-        actions.initializeEntity(rockList);
+        herbivoreList=actions.initializeEntity(herbivoreList);
+        predatorList=actions.initializeEntity(predatorList);
+        grassList=actions.initializeEntity(grassList);
+        treeList=actions.initializeEntity(treeList);
+        rockList=actions.initializeEntity(rockList);
         actions.fillEmptyCellsWithGround();
         Render render =new Render(thisMap);
 
         System.out.println( render.renderMap());
+
 
         for (Herbivore herbivore: herbivoreList
              ) {

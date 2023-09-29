@@ -9,6 +9,7 @@ public class Coordinates {
         this.width = width;
         this.height = height;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -35,9 +36,9 @@ public class Coordinates {
                 '}';
     }
 
-    public int distanceTo(Coordinates distanceTo){
-        int xDistance = Math.abs(this.width- distanceTo.width);
-        int yDistance = Math.abs(this.height- distanceTo.height);
+    public int distanceTo(Coordinates distanceTo) {
+        int xDistance = Math.abs(this.width - distanceTo.width);
+        int yDistance = Math.abs(this.height - distanceTo.height);
         return xDistance + yDistance;
     }
 }

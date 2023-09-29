@@ -4,6 +4,8 @@ import Simulation.Coordinates;
 import Simulation.Map;
 import entity.*;
 import entity.terrains.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -15,8 +17,9 @@ public class Actions {
         this.map = map;
     }
 
-    public <T extends Entity> void initializeEntity(List<T> entityType) {
+    public <T extends Entity> List<T>  initializeEntity(List<T> entityType) {
         int filledCellsOnMap = 0;
+        List<T> modifiedList=new ArrayList<>();
         for (T ent : entityType
         ) {
             Random random = new Random();
@@ -26,12 +29,15 @@ public class Actions {
             if (!map.isCellFilled(coordinates)) {
                 map.addEntityToMap(coordinates, ent);
                 ent.setCurrentCoordinates(coordinates);
+                modifiedList.add(ent);
                 filledCellsOnMap++;
             }
             if (filledCellsOnMap == map.getHSize() * map.getWSize()) {
+
                 break;
             }
         }
+        return modifiedList;
     }
 
     public void fillEmptyCellsWithGround (){
