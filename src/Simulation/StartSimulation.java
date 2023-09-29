@@ -35,11 +35,11 @@ public class StartSimulation {
 
 
         for (int i = 0; i < 1; i++) {
-            herbivoreList.add(new Herbivore(10,100));
+            herbivoreList.add(new Herbivore(2,100));
         }
 
         for (int i = 0; i < 1; i++) {
-            predatorList.add(new Predator(15, 50,25));
+            predatorList.add(new Predator(4, 50,25));
         }
         for (int i = 0; i < 5; i++) {
             treeList.add(new Tree());
@@ -62,20 +62,26 @@ public class StartSimulation {
 
         System.out.println( render.renderMap());
 
-        Pathfinding pathfinding = new Pathfinding(MAX_ROW,MAX_COL);
-
-        pathfinding.setStartNode(new Coordinates(0,2));
-        pathfinding.setGoalNode(new Coordinates(8,7));
-        pathfinding.setSolidNode(new Coordinates(8,2));
-        pathfinding.setSolidNode(new Coordinates(8,3));
-        pathfinding.setSolidNode(new Coordinates(8,4));
-        pathfinding.setSolidNode(new Coordinates(8,5));
-        pathfinding.setSolidNode(new Coordinates(8,6));
-        pathfinding.setSolidNode(new Coordinates(7,6));
-        pathfinding.setSolidNode(new Coordinates(7,7));
-        pathfinding.setSolidNode(new Coordinates(6,7));
-        pathfinding.setSolidNode(new Coordinates(6,8));
-        pathfinding.search();
+        for (Herbivore herbivore: herbivoreList
+             ) {
+            herbivore.setAllObstacles(treeList);
+            herbivore.setAllObstacles(rockList);
+            herbivore.findTarget(grassList);
+        }
+//        Pathfinding pathfinding = new Pathfinding(MAX_ROW,MAX_COL);
+//
+//        pathfinding.setStartNode(new Coordinates(0,2));
+//        pathfinding.setGoalNode(new Coordinates(8,7));
+//        pathfinding.setSolidNode(new Coordinates(8,2));
+//        pathfinding.setSolidNode(new Coordinates(8,3));
+//        pathfinding.setSolidNode(new Coordinates(8,4));
+//        pathfinding.setSolidNode(new Coordinates(8,5));
+//        pathfinding.setSolidNode(new Coordinates(8,6));
+//        pathfinding.setSolidNode(new Coordinates(7,6));
+//        pathfinding.setSolidNode(new Coordinates(7,7));
+//        pathfinding.setSolidNode(new Coordinates(6,7));
+//        pathfinding.setSolidNode(new Coordinates(6,8));
+//        pathfinding.search();
 
 
 //Iteration throw queue

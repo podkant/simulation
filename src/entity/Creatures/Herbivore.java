@@ -28,7 +28,8 @@ public class Herbivore extends Creature {
     public void setTargetCoordinates(Coordinates targetCoordinates) {
         this.targetCoordinates = targetCoordinates;
     }
-    private <T extends Entity> void setAllObstacles(List<T> entityType) {
+
+    public  <T extends Entity> void setAllObstacles(List<T> entityType) {
         if ((entityType instanceof Rock) || (entityType instanceof Tree)) {
             for (T ent : entityType) {
                 obstaclesSet.add(ent.getCurrentCoordinates());
@@ -39,19 +40,18 @@ public class Herbivore extends Creature {
     public void findTarget(List<Grass> grassList) {
         Pathfinding pathfinding = new Pathfinding(MAX_ROW, MAX_COL);
         pathfinding.setStartNode(getCurrentCoordinates());
-        int minDist=Integer.MAX_VALUE;
-        for (Grass grass:grassList
-             ) {
-            int distance=0;
-            distance= getCurrentCoordinates().distanceTo(grass.getCurrentCoordinates());
-            if (distance<minDist){
-                minDist=distance;
+        int minDist = Integer.MAX_VALUE;
+        for (Grass grass : grassList
+        ) {
+            int distance = getCurrentCoordinates().distanceTo(grass.getCurrentCoordinates());
+            if (distance < minDist) {
+                minDist = distance;
                 setTargetCoordinates(grass.getCurrentCoordinates());
             }
         }
         pathfinding.setGoalNode(targetCoordinates);
-        for (Coordinates coordinates: obstaclesSet
-             ) {
+        for (Coordinates coordinates : obstaclesSet
+        ) {
             pathfinding.setSolidNode(coordinates);
         }
         pathfinding.search();
@@ -61,9 +61,21 @@ public class Herbivore extends Creature {
     @Override
     public void makeMove() {
         System.out.println(icon + "is moving " + speed);
+        Coordinates coordToCheck = getCurrentCoordinates();
+        System.out.println(getCurrentCoordinates().toString());
+        for (int i = 0; i < speed; i++) {
+            try {
+                coordToCheck = currentTrack.remove();
 
 
+            } catch (NoSuchElementException exception) {
+                setCurrentCoordinates(coordToCheck);
+                break;
 
+            }
+        }
+        setCurrentCoordinates(coordToCheck);
+        System.out.println(getCurrentCoordinates().toString());
 
     }
 }
