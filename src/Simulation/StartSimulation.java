@@ -44,10 +44,10 @@ public class StartSimulation {
         for (int i = 0; i < 5; i++) {
             treeList.add(new Tree());
         }
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             rockList.add(new Rock());
         }
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 5; i++) {
             grassList.add(new Grass());
         }
 
@@ -68,6 +68,7 @@ public class StartSimulation {
             herbivore.setAllObstacles(treeList);
             herbivore.setAllObstacles(rockList);
             herbivore.findTarget(grassList);
+            herbivore.makeMove();
         }
 //        Pathfinding pathfinding = new Pathfinding(MAX_ROW,MAX_COL);
 //

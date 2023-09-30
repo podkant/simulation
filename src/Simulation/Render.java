@@ -1,6 +1,7 @@
 package Simulation;
 
 import entity.Entity;
+import entity.terrains.Ground;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,9 +24,12 @@ public class Render {
 //                }
 
                     if (map.containsKey(coordinates)) {
-                        sb.append(map.getMap().get(coordinates).icon);
-                    } else {
-                        sb.append("\uD83C\uDF2B\uFE0F");
+                        if ((map.getEntityFromMap(coordinates) instanceof Ground) ){
+                            sb.append((map.getEntityFromMap(coordinates).getCurrentCoordinates().width)).append((map.getEntityFromMap(coordinates).getCurrentCoordinates().height)).append(" ");
+                        } else {
+                            sb.append(map.getMap().get(coordinates).icon).append(" ");
+                        }
+
                     }
             }
             sb.append("\n");

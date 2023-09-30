@@ -29,9 +29,9 @@ public class Herbivore extends Creature {
         this.targetCoordinates = targetCoordinates;
     }
 
-    public  <T extends Entity> void setAllObstacles(List<T> entityType) {
-        if ((entityType instanceof Rock) || (entityType instanceof Tree)) {
-            for (T ent : entityType) {
+    public <T extends Entity> void setAllObstacles(List<T> entityType) {
+        for (T ent : entityType) {
+            if ((ent instanceof Rock) || (ent instanceof Tree)) {
                 obstaclesSet.add(ent.getCurrentCoordinates());
             }
         }
@@ -61,22 +61,45 @@ public class Herbivore extends Creature {
 
     @Override
     public void makeMove() {
-        System.out.println(icon + "is moving " + speed);
         Coordinates coordToCheck = getCurrentCoordinates();
         System.out.println(getCurrentCoordinates().toString());
-        for (int i = 0; i < speed; i++) {
-            try {
-                coordToCheck = currentTrack.remove();
-
-
-            } catch (NoSuchElementException exception) {
-                setCurrentCoordinates(coordToCheck);
-                break;
-
+        boolean endOfTurn = false;
+        int movedCells = 0;
+        if (currentTrack.isEmpty()) {
+            //If no need to move we eat
+            endOfTurn = true;
+            System.out.println(this.icon + " eating grass at " + targetCoordinates);
+        } else {
+            while (!endOfTurn) {
+                //moving up to speed or up to target
+                try {
+                    coordToCheck = currentTrack.remove();
+                    System.out.println(icon + "is moving to" + coordToCheck.toString());
+                    movedCells++;
+                } catch (NoSuchElementException exception) {
+                    setCurrentCoordinates(coordToCheck);
+                    System.out.println(icon + "is finished at " + getCurrentCoordinates().toString());
+                    endOfTurn = true;
+                }
+                if (movedCells == speed) {
+                    endOfTurn = true;
+                }
             }
+            setCurrentCoordinates(coordToCheck);
+//            System.out.println(icon + "is moving to" + getCurrentCoordinates().toString());
         }
-        setCurrentCoordinates(coordToCheck);
-        System.out.println(getCurrentCoordinates().toString());
+
+//        Iterator<Coordinates> iterator = currentTrack.iterator();
+//        if (iterator.hasNext()) {
+//            for (int i = 0; i < speed; i++) {
+//                try {
+//                    coordToCheck = currentTrack.remove();
+//                } catch (NoSuchElementException exception) {
+//                    setCurrentCoordinates(coordToCheck);
+//                    break;
+//                }
+//            }
+//            iterator.next();
 
     }
 }
