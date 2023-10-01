@@ -1,13 +1,9 @@
 package entity.Creatures;
-
 import Simulation.Coordinates;
 import Simulation.Pathfinding;
-import entity.Creatures.Creature;
 import entity.Entity;
-import entity.terrains.Grass;
-import entity.terrains.Rock;
-import entity.terrains.Tree;
-import entity.terrains.notPassable;
+import entity.terrains.*;
+
 
 import java.util.*;
 
@@ -19,6 +15,9 @@ public class Herbivore extends Creature {
     private Coordinates targetCoordinates;
     private Set<Coordinates> obstaclesSet = new HashSet<>();
     private ArrayList<Coordinates> currentTrack;
+    public int currentHP=heathPoints;
+    public boolean reproduction = false;
+
 
     public Herbivore(int speed, int heathPoints) {
         super(speed, heathPoints);
@@ -28,6 +27,10 @@ public class Herbivore extends Creature {
 
     public void setTargetCoordinates(Coordinates targetCoordinates) {
         this.targetCoordinates = targetCoordinates;
+    }
+
+    public Coordinates getTargetCoordinates() {
+        return targetCoordinates;
     }
 
     public <T extends Entity & notPassable> void setAllObstacles(List<T> entityType) {
@@ -67,8 +70,7 @@ public class Herbivore extends Creature {
         int movedCells = 0;
         if (currentTrack.isEmpty()) {
             //If no need to move herbivore eats
-            endOfTurn = true;
-            System.out.println(this.icon + " eating grass at " + targetCoordinates);
+            eating(targetCoordinates);
         } else {
             int i = currentTrack.size()-1;
             while (!endOfTurn) {
@@ -88,20 +90,16 @@ public class Herbivore extends Creature {
                 }
             }
             setCurrentCoordinates(coordToCheck);
-//            System.out.println(icon + "is moving to" + getCurrentCoordinates().toString());
         }
+    }
 
-//        Iterator<Coordinates> iterator = currentTrack.iterator();
-//        if (iterator.hasNext()) {
-//            for (int i = 0; i < speed; i++) {
-//                try {
-//                    coordToCheck = currentTrack.remove();
-//                } catch (NoSuchElementException exception) {
-//                    setCurrentCoordinates(coordToCheck);
-//                    break;
-//                }
-//            }
-//            iterator.next();
-
+    public void eating (Coordinates coordinates){
+        System.out.println(this.icon + " eating grass at " + coordinates);
+        if (currentHP<heathPoints) {
+            currentHP=heathPoints;
+        } else{
+            reproduction=true;
+            System.out.println("New "+this.icon + " will burn at " + coordinates);
+        }
     }
 }

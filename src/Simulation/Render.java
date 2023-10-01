@@ -10,6 +10,7 @@ public class Render {
     Map map;
 
     Set<Coordinates> allCoordinates = new HashSet<>();
+
     public Render(Map map) {
         this.map = map;
     }
@@ -19,18 +20,14 @@ public class Render {
         for (int i = 0; i < map.getHSize(); i++) {
             for (int j = 0; j < map.getWSize(); j++) {
                 Coordinates coordinates = new Coordinates(j, i);
-//                if (map.getMap().entrySet().contains(coordinates)) {
-//                    sb.append(map.getMap().get(coordinates));
-//                }
-
-                    if (map.containsKey(coordinates)) {
-                        if ((map.getEntityFromMap(coordinates) instanceof Ground) ){
-                            sb.append((map.getEntityFromMap(coordinates).getCurrentCoordinates().width)).append((map.getEntityFromMap(coordinates).getCurrentCoordinates().height)).append(" ");
-                        } else {
-                            sb.append(map.getMap().get(coordinates).icon).append(" ");
-                        }
-
+                if (map.containsKey(coordinates)) {
+                    if ((map.getEntityFromMap(coordinates) instanceof Ground)) {
+                        sb.append((map.getEntityFromMap(coordinates).getCurrentCoordinates().width)).append((map.getEntityFromMap(coordinates).getCurrentCoordinates().height)).append(" ");
+                    } else {
+                        sb.append(map.getMap().get(coordinates).icon).append(" ");
                     }
+
+                }
             }
             sb.append("\n");
         }

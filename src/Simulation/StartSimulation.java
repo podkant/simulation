@@ -3,13 +3,8 @@ package Simulation;
 import Simulation.Actions.Actions;
 import entity.Creatures.Herbivore;
 import entity.Creatures.Predator;
-import entity.Entity;
-import entity.terrains.Grass;
-import entity.terrains.Rock;
-import entity.terrains.Tree;
-
+import entity.terrains.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class StartSimulation {
@@ -47,7 +42,7 @@ public class StartSimulation {
         for (int i = 0; i < 10; i++) {
             rockList.add(new Rock());
         }
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 20; i++) {
             grassList.add(new Grass());
         }
 
@@ -69,7 +64,15 @@ public class StartSimulation {
             herbivore.setAllObstacles(rockList);
             herbivore.findTarget(grassList);
             herbivore.makeMove();
+            if (herbivore.reproduction) {
+                Herbivore childHerbivore = new Herbivore(2,100);
+                childHerbivore.setCurrentCoordinates(herbivore.getTargetCoordinates());
+                thisMap.removeEntityFromMap(herbivore.getTargetCoordinates());
+                thisMap.addEntityToMap(childHerbivore.getCurrentCoordinates(),childHerbivore);
+            }
         }
+
+        System.out.println(thisMap.getMap());
 //        Pathfinding pathfinding = new Pathfinding(MAX_ROW,MAX_COL);
 //
 //        pathfinding.setStartNode(new Coordinates(0,2));

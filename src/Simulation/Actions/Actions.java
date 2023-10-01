@@ -51,8 +51,11 @@ public class Actions {
 
                 }
             }
-
         }
+    }
+
+    public void simulateTurn(int turnCount){
+
     }
 
 }

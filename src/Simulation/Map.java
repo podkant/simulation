@@ -18,6 +18,9 @@ public class Map {
     public void addEntityToMap(Coordinates coordinates,Entity entity){
         map.put(coordinates,entity);
     }
+    public void removeEntityFromMap(Coordinates coordinates){
+        map.remove(coordinates);
+    }
     public Entity getEntityFromMap(Coordinates coordinates){
         if (map.containsKey(coordinates)){
             return map.get(coordinates);
