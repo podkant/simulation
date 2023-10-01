@@ -7,6 +7,7 @@ import entity.Entity;
 import entity.terrains.Grass;
 import entity.terrains.Rock;
 import entity.terrains.Tree;
+import entity.terrains.notPassable;
 
 import java.util.*;
 
@@ -17,7 +18,7 @@ public class Herbivore extends Creature {
 
     private Coordinates targetCoordinates;
     private Set<Coordinates> obstaclesSet = new HashSet<>();
-    private Queue<Coordinates> currentTrack;
+    private ArrayList<Coordinates> currentTrack;
 
     public Herbivore(int speed, int heathPoints) {
         super(speed, heathPoints);
@@ -29,11 +30,10 @@ public class Herbivore extends Creature {
         this.targetCoordinates = targetCoordinates;
     }
 
-    public <T extends Entity> void setAllObstacles(List<T> entityType) {
+    public <T extends Entity & notPassable> void setAllObstacles(List<T> entityType) {
         for (T ent : entityType) {
-            if ((ent instanceof Rock) || (ent instanceof Tree)) {
-                obstaclesSet.add(ent.getCurrentCoordinates());
-            }
+            obstaclesSet.add(ent.getCurrentCoordinates());
+
         }
     }
 
@@ -66,17 +66,19 @@ public class Herbivore extends Creature {
         boolean endOfTurn = false;
         int movedCells = 0;
         if (currentTrack.isEmpty()) {
-            //If no need to move we eat
+            //If no need to move herbivore eats
             endOfTurn = true;
             System.out.println(this.icon + " eating grass at " + targetCoordinates);
         } else {
+            int i = currentTrack.size()-1;
             while (!endOfTurn) {
                 //moving up to speed or up to target
-                try {
-                    coordToCheck = currentTrack.remove();
-                    System.out.println(icon + "is moving to" + coordToCheck.toString());
-                    movedCells++;
-                } catch (NoSuchElementException exception) {
+                coordToCheck = currentTrack.get(i);
+                currentTrack.remove(i);
+                i--;
+                System.out.println(icon + "is moving to" + coordToCheck.toString());
+                movedCells++;
+                if (currentTrack.isEmpty()) {
                     setCurrentCoordinates(coordToCheck);
                     System.out.println(icon + "is finished at " + getCurrentCoordinates().toString());
                     endOfTurn = true;

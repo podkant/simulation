@@ -17,7 +17,7 @@ public class Pathfinding {
     private Node startNode, currentNode, goalNode;
     private ArrayList<Node> openList= new ArrayList<>();
     private ArrayList<Node> closedList= new ArrayList<>();
-    private Queue<Coordinates> track = new LinkedList<>();
+    private ArrayList<Coordinates> track = new ArrayList<>();
 
     boolean GoalReached = false;
     public Pathfinding(int maxRow,int maxCol) {
@@ -148,7 +148,7 @@ public class Pathfinding {
 
     }
 
-    public Queue<Coordinates> getTrack() {
+    public ArrayList<Coordinates> getTrack() {
         return track;
 
     }

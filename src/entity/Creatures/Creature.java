@@ -2,7 +2,7 @@ package entity.Creatures;
 
 import entity.Entity;
 
-public abstract class Creature extends Entity {
+public class Creature extends Entity {
     public  int speed;
     public  int heathPoints;
 
@@ -15,6 +15,8 @@ public abstract class Creature extends Entity {
 
     }
 
-    public abstract void makeMove();
+    public void makeMove(){
+
+    }
 
 }

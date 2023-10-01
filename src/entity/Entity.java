@@ -2,7 +2,7 @@ package entity;
 
 import Simulation.Coordinates;
 
-public abstract class Entity {
+public class Entity {
     public String icon=" ";
     private Coordinates currentCoordinates;
     protected Entity() {
