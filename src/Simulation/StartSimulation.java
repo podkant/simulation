@@ -72,30 +72,7 @@ public class StartSimulation {
             }
         }
 
-        System.out.println(thisMap.getMap());
-//        Pathfinding pathfinding = new Pathfinding(MAX_ROW,MAX_COL);
-//
-//        pathfinding.setStartNode(new Coordinates(0,2));
-//        pathfinding.setGoalNode(new Coordinates(8,7));
-//        pathfinding.setSolidNode(new Coordinates(8,2));
-//        pathfinding.setSolidNode(new Coordinates(8,3));
-//        pathfinding.setSolidNode(new Coordinates(8,4));
-//        pathfinding.setSolidNode(new Coordinates(8,5));
-//        pathfinding.setSolidNode(new Coordinates(8,6));
-//        pathfinding.setSolidNode(new Coordinates(7,6));
-//        pathfinding.setSolidNode(new Coordinates(7,7));
-//        pathfinding.setSolidNode(new Coordinates(6,7));
-//        pathfinding.setSolidNode(new Coordinates(6,8));
-//        pathfinding.search();
-
-
-//Iteration throw queue
-//        Iterator<Coordinates> iterator = pathfinding.getTrack().iterator();
-//        while(iterator.hasNext()){
-//            Coordinates iter = iterator.next();
-//            int trackWidth = iter.width;
-//            int trackHeight = iter.height;
-//        }
+//        System.out.println(thisMap.getMap());
 
     }
 }
