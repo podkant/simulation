@@ -33,4 +33,22 @@ public class Render {
         }
         return sb.toString();
     }
+    public String displayMap() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < map.getHSize(); i++) {
+            for (int j = 0; j < map.getWSize(); j++) {
+                Coordinates coordinates = new Coordinates(j, i);
+                if (map.isCellFilled(coordinates)) {
+                    if ((map.getEntityFromMap(coordinates) instanceof Ground)) {
+                        sb.append((map.getEntityFromMap(coordinates).getCurrentCoordinates().width)).append((map.getEntityFromMap(coordinates).getCurrentCoordinates().height)).append(" ");
+                    } else {
+                        sb.append(map.getMap().get(coordinates).icon).append(" ");
+                    }
+
+                }
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }

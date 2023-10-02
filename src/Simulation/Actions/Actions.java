@@ -3,6 +3,7 @@ package Simulation.Actions;
 import Simulation.Coordinates;
 import Simulation.Map;
 import entity.*;
+import entity.Creatures.*;
 import entity.terrains.*;
 
 import java.util.ArrayList;
@@ -52,6 +53,18 @@ public class Actions {
                 }
             }
         }
+    }
+    public void herbivoreMove (Herbivore herbivore) {
+        if ((!herbivore.getStartedCoordinates().equals(herbivore.getCurrentCoordinates()) && (map.getEntityFromMap(herbivore.getCurrentCoordinates()) instanceof Ground))) {
+            map.removeEntityFromMap(herbivore.getStartedCoordinates());
+            Ground ground =new Ground();
+            ground.setCurrentCoordinates(herbivore.getStartedCoordinates());
+            map.addEntityToMap(ground.getCurrentCoordinates(),ground);
+            map.removeEntityFromMap(herbivore.getCurrentCoordinates());
+            map.addEntityToMap(herbivore.getCurrentCoordinates(),herbivore);
+        }
+
+
     }
 
     public void simulateTurn(int turnCount){

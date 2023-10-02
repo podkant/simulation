@@ -13,6 +13,7 @@ import static Simulation.StartSimulation.MAX_ROW;
 public class Herbivore extends Creature {
 
     private Coordinates targetCoordinates;
+    private Coordinates startedCoordinates;
     private Set<Coordinates> obstaclesSet = new HashSet<>();
     private ArrayList<Coordinates> currentTrack;
     public int currentHP=heathPoints;
@@ -31,6 +32,10 @@ public class Herbivore extends Creature {
 
     public Coordinates getTargetCoordinates() {
         return targetCoordinates;
+    }
+
+    public Coordinates getStartedCoordinates() {
+        return startedCoordinates;
     }
 
     public <T extends Entity & notPassable> void setAllObstacles(List<T> entityType) {
@@ -68,6 +73,7 @@ public class Herbivore extends Creature {
         System.out.println(getCurrentCoordinates().toString());
         boolean endOfTurn = false;
         int movedCells = 0;
+        startedCoordinates=getCurrentCoordinates();
         if (currentTrack.isEmpty()) {
             //If no need to move herbivore eats
             eating(targetCoordinates);
@@ -91,6 +97,7 @@ public class Herbivore extends Creature {
             }
             setCurrentCoordinates(coordToCheck);
         }
+
     }
 
     public void eating (Coordinates coordinates){

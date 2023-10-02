@@ -42,7 +42,7 @@ public class StartSimulation {
         for (int i = 0; i < 10; i++) {
             rockList.add(new Rock());
         }
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             grassList.add(new Grass());
         }
 
@@ -64,6 +64,7 @@ public class StartSimulation {
             herbivore.setAllObstacles(rockList);
             herbivore.findTarget(grassList);
             herbivore.makeMove();
+            actions.herbivoreMove(herbivore);
             if (herbivore.reproduction) {
                 Herbivore childHerbivore = new Herbivore(2,100);
                 childHerbivore.setCurrentCoordinates(herbivore.getTargetCoordinates());
@@ -71,7 +72,7 @@ public class StartSimulation {
                 thisMap.addEntityToMap(childHerbivore.getCurrentCoordinates(),childHerbivore);
             }
         }
-
+        System.out.println( render.displayMap());
 //        System.out.println(thisMap.getMap());
 
     }
