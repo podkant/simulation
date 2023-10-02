@@ -1,7 +1,7 @@
 package Simulation;
 
 public class Coordinates {
-    public final int SCALING = 10;
+
     public int width;
     public int height;
 

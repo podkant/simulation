@@ -38,6 +38,10 @@ public class Herbivore extends Creature {
         return startedCoordinates;
     }
 
+    public void setStartedCoordinates(Coordinates startedCoordinates) {
+        this.startedCoordinates = startedCoordinates;
+    }
+
     public <T extends Entity & notPassable> void setAllObstacles(List<T> entityType) {
         for (T ent : entityType) {
             obstaclesSet.add(ent.getCurrentCoordinates());
@@ -73,7 +77,7 @@ public class Herbivore extends Creature {
         System.out.println(getCurrentCoordinates().toString());
         boolean endOfTurn = false;
         int movedCells = 0;
-        startedCoordinates=getCurrentCoordinates();
+        setStartedCoordinates(getCurrentCoordinates());
         if (currentTrack.isEmpty()) {
             //If no need to move herbivore eats
             eating(targetCoordinates);
