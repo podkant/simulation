@@ -1,16 +1,16 @@
-package entity.Creatures;
-import Simulation.Coordinates;
-import Simulation.Pathfinding;
+package entity.creatures;
+import simulation.Coordinates;
+import simulation.Pathfinding;
 import entity.Entity;
 import entity.terrains.*;
 
 
 import java.util.*;
 
-import static Simulation.StartSimulation.MAX_COL;
-import static Simulation.StartSimulation.MAX_ROW;
+import static simulation.StartSimulation.MAX_COL;
+import static simulation.StartSimulation.MAX_ROW;
 
-public class Herbivore extends Creature {
+public class Herbivore extends Creature  {
 
     private Coordinates targetCoordinates;
     private Coordinates startedCoordinates;
@@ -42,7 +42,7 @@ public class Herbivore extends Creature {
         this.startedCoordinates = startedCoordinates;
     }
 
-    public <T extends Entity & notPassable> void setAllObstacles(List<T> entityType) {
+    public <T extends Entity & NotPassable> void setAllObstacles(List<T> entityType) {
         for (T ent : entityType) {
             obstaclesSet.add(ent.getCurrentCoordinates());
 
@@ -58,7 +58,7 @@ public class Herbivore extends Creature {
             int distance = getCurrentCoordinates().distanceTo(grass.getCurrentCoordinates());
             if (distance < minDist) {
                 minDist = distance;
-                System.out.println(minDist);
+//                System.out.println(minDist);
                 setTargetCoordinates(grass.getCurrentCoordinates());
             }
         }

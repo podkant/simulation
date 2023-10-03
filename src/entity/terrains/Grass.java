@@ -1,6 +1,5 @@
 package entity.terrains;
 
-import Simulation.Coordinates;
 import entity.Entity;
 
 

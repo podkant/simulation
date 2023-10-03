@@ -1,6 +1,5 @@
-package Simulation;
+package simulation;
 
-import entity.Entity;
 import entity.terrains.Ground;
 
 import java.util.HashSet;

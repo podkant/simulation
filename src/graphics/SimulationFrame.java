@@ -15,7 +15,7 @@ public class SimulationFrame extends JFrame {
         this.mapWidth = mapWidth;
         this.cellH=cellH;
         this.cellW=cellW;
-        this.setTitle("Simulation");
+        this.setTitle("simulation");
         this.setResizable(false);
 
         panel =new SimulationPanel(mapWidth,mapHeight,cellW,cellH);

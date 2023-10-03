@@ -1,6 +1,6 @@
 package entity;
 
-import Simulation.Coordinates;
+import simulation.Coordinates;
 
 public class Entity {
     public String icon=" ";

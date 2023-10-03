@@ -1,4 +1,4 @@
-package entity.Creatures;
+package entity.creatures;
 
 import entity.Entity;
 

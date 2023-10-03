@@ -1,6 +1,4 @@
-package entity.Creatures;
-
-import entity.Creatures.Creature;
+package entity.creatures;
 
 public class Predator extends Creature {
     public int attackPower;

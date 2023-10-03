@@ -1,4 +1,4 @@
-package Simulation;
+package simulation;
 import java.util.ArrayList;
 
 public class Pathfinding {
@@ -130,15 +130,15 @@ public class Pathfinding {
 
     private void backtrackPath() {
         Node current = goalNode;
-        StringBuilder stringBuilder=new StringBuilder("Track is: ");
+//        StringBuilder stringBuilder=new StringBuilder("Track is: ");
         while  (current!=startNode){
             current=current.parent;
             if (current != startNode) {
                 track.add(new Coordinates(current.x,current.y));
-                stringBuilder.append(current.x).append("_").append(current.y).append(" ");
+//                stringBuilder.append(current.x).append("_").append(current.y).append(" ");
             }
         }
-        System.out.println(stringBuilder);
+//        System.out.println(stringBuilder);
 
     }
 

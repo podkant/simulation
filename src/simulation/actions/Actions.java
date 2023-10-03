@@ -1,9 +1,9 @@
-package Simulation.Actions;
+package simulation.actions;
 
-import Simulation.Coordinates;
-import Simulation.Map;
+import simulation.Coordinates;
+import simulation.Map;
 import entity.*;
-import entity.Creatures.*;
+import entity.creatures.*;
 import entity.terrains.*;
 
 import java.util.ArrayList;
@@ -55,24 +55,38 @@ public class Actions {
         }
     }
     public void herbivoreMove (Herbivore herbivore) {
+
         if (!herbivore.getStartedCoordinates().equals(herbivore.getCurrentCoordinates())) {
             if (map.getEntityFromMap(herbivore.getCurrentCoordinates()) instanceof Ground){
-                map.removeEntityFromMap(herbivore.getStartedCoordinates());
-                Ground ground =new Ground();
-                ground.setCurrentCoordinates(herbivore.getStartedCoordinates());
-                map.addEntityToMap(ground.getCurrentCoordinates(),ground);
-                map.removeEntityFromMap(herbivore.getCurrentCoordinates());
-                map.addEntityToMap(herbivore.getCurrentCoordinates(),herbivore);
-                herbivore.setStartedCoordinates(herbivore.getCurrentCoordinates());
+                map.swapMapCell(herbivore.getStartedCoordinates(),herbivore.getCurrentCoordinates());
             }
             else {
                 herbivore.setCurrentCoordinates(herbivore.getStartedCoordinates());
             }
         }
-
-
-
     }
+
+
+
+//    public <T extends Creature > List<T>  moveCreatures(List<T> creatureList) {
+//        List<T> modifiedList=new ArrayList<>();
+//        for (T creature: creatureList
+//        ) {
+//            creature.setAllObstacles(treeList);
+//            creature.setAllObstacles(rockList);
+//            creature.findTarget(grassList);
+//            herbivore.makeMove();
+//            actions.herbivoreMove(herbivore);
+//            if (herbivore.reproduction) {
+//                Herbivore childHerbivore = new Herbivore(2,100);
+//                childHerbivore.setCurrentCoordinates(herbivore.getTargetCoordinates());
+//                thisMap.removeEntityFromMap(herbivore.getTargetCoordinates());
+//                thisMap.addEntityToMap(childHerbivore.getCurrentCoordinates(),childHerbivore);
+//            }
+//        }
+//        System.out.println( render.displayMap());
+//        return modifiedList;
+//    }
 
     public void simulateTurn(int turnCount){
 
