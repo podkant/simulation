@@ -75,15 +75,14 @@ public class StartSimulation {
                     herbivore.reproduction=false;
                 }
             }
+            herbivoreList = new ArrayList<>();
+            predatorList = new ArrayList<>();
+            grassList = new ArrayList<>();
+            treeList = new ArrayList<>();
+            rockList = new ArrayList<>();
             for (java.util.Map.Entry<Coordinates, Entity> entry : thisMap.getMap().entrySet()
             ) {
                 Entity value = entry.getValue();
-                herbivoreList = new ArrayList<>();
-                predatorList = new ArrayList<>();
-                grassList = new ArrayList<>();
-                treeList = new ArrayList<>();
-                rockList = new ArrayList<>();
-
                 if (value instanceof Herbivore herbivore) {
                     herbivoreList.add(herbivore);
                 }
