@@ -12,9 +12,7 @@ import static simulation.StartSimulation.MAX_ROW;
 
 public class Herbivore extends Creature  {
 
-    private Coordinates targetCoordinates;
-    private Coordinates startedCoordinates;
-    private Set<Coordinates> obstaclesSet = new HashSet<>();
+
     private ArrayList<Coordinates> currentTrack;
     public int currentHP=heathPoints;
     public boolean reproduction = false;
@@ -24,29 +22,6 @@ public class Herbivore extends Creature  {
         super(speed, heathPoints);
         this.icon = "\uD83D\uDC30";
 
-    }
-
-    public void setTargetCoordinates(Coordinates targetCoordinates) {
-        this.targetCoordinates = targetCoordinates;
-    }
-
-    public Coordinates getTargetCoordinates() {
-        return targetCoordinates;
-    }
-
-    public Coordinates getStartedCoordinates() {
-        return startedCoordinates;
-    }
-
-    public void setStartedCoordinates(Coordinates startedCoordinates) {
-        this.startedCoordinates = startedCoordinates;
-    }
-
-    public <T extends Entity & NotPassable> void setAllObstacles(List<T> entityType) {
-        for (T ent : entityType) {
-            obstaclesSet.add(ent.getCurrentCoordinates());
-
-        }
     }
 
     public void findTarget(List<Grass> grassList) {
@@ -74,7 +49,7 @@ public class Herbivore extends Creature  {
     @Override
     public void makeMove() {
         Coordinates coordToCheck = getCurrentCoordinates();
-        System.out.println(getCurrentCoordinates().toString());
+//        System.out.println(getCurrentCoordinates().toString());
         boolean endOfTurn = false;
         int movedCells = 0;
         setStartedCoordinates(getCurrentCoordinates());
@@ -88,11 +63,11 @@ public class Herbivore extends Creature  {
                 coordToCheck = currentTrack.get(i);
                 currentTrack.remove(i);
                 i--;
-                System.out.println(icon + "is moving to" + coordToCheck.toString());
+//                System.out.println(icon + "is moving to" + coordToCheck.toString());
                 movedCells++;
                 if (currentTrack.isEmpty()) {
                     setCurrentCoordinates(coordToCheck);
-                    System.out.println(icon + "is finished at " + getCurrentCoordinates().toString());
+//                    System.out.println(icon + "is finished at " + getCurrentCoordinates().toString());
                     endOfTurn = true;
                 }
                 if (movedCells == speed) {
@@ -107,7 +82,11 @@ public class Herbivore extends Creature  {
     public void eating (Coordinates coordinates){
         System.out.println(this.icon + " eating grass at " + coordinates);
         if (currentHP<heathPoints) {
-            currentHP=heathPoints;
+            currentHP=currentHP+10;
+            if (currentHP>=heathPoints) {
+                this.icon="\uD83D\uDC30";
+                currentHP=heathPoints;
+            }
         } else{
             reproduction=true;
             System.out.println("New "+this.icon + " will burn at " + coordinates);

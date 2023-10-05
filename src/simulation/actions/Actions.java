@@ -11,11 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static simulation.StartSimulation.rockList;
-import static simulation.StartSimulation.treeList;
-
 public class Actions {
     Map map;
+
 
 
     public Actions(Map map) {
@@ -59,31 +57,56 @@ public class Actions {
         }
     }
 
-    public void herbivoreMove(Herbivore herbivore) {
+    public  <T extends Creature> void creatureMoveOnMap(T creature) {
 
-        if (!herbivore.getStartedCoordinates().equals(herbivore.getCurrentCoordinates())) {
-            if (map.getEntityFromMap(herbivore.getCurrentCoordinates()) instanceof Ground) {
-                map.swapMapCell(herbivore.getStartedCoordinates(), herbivore.getCurrentCoordinates());
+        if (!creature.getStartedCoordinates().equals(creature.getCurrentCoordinates())) {
+            if (map.getEntityFromMap(creature.getCurrentCoordinates()) instanceof Ground) {
+                map.swapMapCell(creature.getStartedCoordinates(), creature.getCurrentCoordinates());
             } else {
-                herbivore.setCurrentCoordinates(herbivore.getStartedCoordinates());
+                creature.setCurrentCoordinates(creature.getStartedCoordinates());
             }
         }
     }
 
-    public void herbivoreCheck() {
+    public void herbivoreTurn() {
         for (Herbivore herbivore : StartSimulation.herbivoreList
         ) {
             herbivore.setAllObstacles(StartSimulation.treeList);
             herbivore.setAllObstacles(StartSimulation.rockList);
             herbivore.findTarget(StartSimulation.grassList);
             herbivore.makeMove();
-            herbivoreMove(herbivore);
+            creatureMoveOnMap(herbivore);
             if (herbivore.reproduction) {
-                Herbivore childHerbivore = new Herbivore(2, 100);
+                Herbivore childHerbivore = new Herbivore(StartSimulation.HERBIVORE_SPEED, StartSimulation.HERBIVORE_HP);
                 childHerbivore.setCurrentCoordinates(herbivore.getTargetCoordinates());
                 map.removeEntityFromMap(herbivore.getTargetCoordinates());
                 map.addEntityToMap(childHerbivore.getCurrentCoordinates(), childHerbivore);
                 herbivore.reproduction = false;
+            }
+        }
+    }
+    public void predatorTurn() {
+        for (Predator predator : StartSimulation.predatorList
+        ) {
+            predator.setAllObstacles(StartSimulation.treeList);
+            predator.setAllObstacles(StartSimulation.rockList);
+            predator.findTarget(StartSimulation.herbivoreList);
+            predator.makeMove();
+            creatureMoveOnMap(predator);
+            if (predator.attacking) {
+                if (map.getEntityFromMap(predator.getTargetCoordinates()) instanceof Herbivore attacked){
+                    attacked.currentHP=attacked.currentHP-predator.attackPower;
+                    attacked.icon="\uD83D\uDC07";
+                    if (attacked.currentHP <= 0) {
+                        Predator childPredator = new Predator(StartSimulation.PREDATOR_SPEED, StartSimulation.PREDATOR_HP,StartSimulation.PREDATOR_ATTACK);
+                        childPredator.setCurrentCoordinates(predator.getTargetCoordinates());
+                        childPredator.currentHP=StartSimulation.PREDATOR_HP-1;
+                        map.removeEntityFromMap(predator.getTargetCoordinates());
+                        map.addEntityToMap(childPredator.getCurrentCoordinates(), childPredator);
+                        System.out.println("New "+childPredator.icon + " will burn at " + childPredator.getCurrentCoordinates());
+                    }
+                }
+                predator.attacking = false;
             }
         }
     }

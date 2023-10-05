@@ -2,8 +2,8 @@ package simulation;
 
 import entity.Entity;
 import simulation.actions.Actions;
-import entity.creatures.Herbivore;
-import entity.creatures.Predator;
+import entity.creatures.*;
+
 import entity.terrains.*;
 
 import java.util.ArrayList;
@@ -13,6 +13,13 @@ public class StartSimulation {
 
     public static final int MAX_ROW = 10;
     public static final int MAX_COL = 10;
+
+    public static final int PREDATOR_HP =50;
+    public static final int PREDATOR_SPEED =5;
+    public static final int PREDATOR_ATTACK =60;
+
+    public static final int HERBIVORE_HP =100;
+    public static final int HERBIVORE_SPEED =2;
 
     public static List<Herbivore> herbivoreList = new ArrayList<>();
     public static List<Predator> predatorList = new ArrayList<>();
@@ -31,11 +38,13 @@ public class StartSimulation {
 
 
         for (int i = 0; i < 3; i++) {
-            herbivoreList.add(new Herbivore(2, 100));
+            Herbivore herbivore =new Herbivore(HERBIVORE_SPEED, HERBIVORE_HP);
+            herbivore.currentHP=HERBIVORE_HP-1;
+            herbivoreList.add(herbivore);
         }
 
         for (int i = 0; i < 1; i++) {
-            predatorList.add(new Predator(4, 50, 25));
+            predatorList.add(new Predator(PREDATOR_SPEED, PREDATOR_HP, PREDATOR_ATTACK));
         }
         for (int i = 0; i < 5; i++) {
             treeList.add(new Tree());
@@ -58,9 +67,10 @@ public class StartSimulation {
 
         System.out.println(render.renderMap());
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 20; i++) {
             System.out.println("Turn: " + (i + 1));
-            actions.herbivoreCheck();
+            actions.herbivoreTurn();
+            actions.predatorTurn();
             herbivoreList = new ArrayList<>();
             predatorList = new ArrayList<>();
             grassList = new ArrayList<>();
@@ -87,30 +97,7 @@ public class StartSimulation {
             }
             System.out.println(render.displayMap());
         }
-
-//        for (int i = 0; i < 5; i++) {
-//            for (Herbivore herbivore: herbivoreList
-//            ) {
-//                herbivore.setAllObstacles(treeList);
-//                herbivore.setAllObstacles(rockList);
-//                herbivore.findTarget(grassList);
-//                herbivore.makeMove();
-//                actions.herbivoreMove(herbivore);
-//                if (herbivore.reproduction) {
-//                    Herbivore childHerbivore = new Herbivore(2,100);
-//                    childHerbivore.setCurrentCoordinates(herbivore.getTargetCoordinates());
-//                    thisMap.removeEntityFromMap(herbivore.getTargetCoordinates());
-//                    thisMap.addEntityToMap(childHerbivore.getCurrentCoordinates(),childHerbivore);
-//                }
-//            }
-//            System.out.println( render.displayMap());
-//        }
-
-//        System.out.println(thisMap.getMap());
-
     }
-
-
 }
 
 
