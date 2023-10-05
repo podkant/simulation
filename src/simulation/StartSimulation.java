@@ -14,6 +14,12 @@ public class StartSimulation {
     public static final int MAX_ROW = 10;
     public static final int MAX_COL = 10;
 
+    public static List<Herbivore> herbivoreList = new ArrayList<>();
+    public static List<Predator> predatorList = new ArrayList<>();
+    public static List<Tree> treeList = new ArrayList<>();
+    public static List<Rock> rockList = new ArrayList<>();
+    public static List<Grass> grassList = new ArrayList<>();
+
 
     public static void main(String[] args) {
 //        SimulationFrame simulationFrame = new SimulationFrame(302,502,10,10);
@@ -22,12 +28,6 @@ public class StartSimulation {
         thisMap.setWSize(MAX_COL);
 
         Actions actions = new Actions(thisMap);
-
-        List<Herbivore> herbivoreList = new ArrayList<>();
-        List<Predator> predatorList = new ArrayList<>();
-        List<Tree> treeList = new ArrayList<>();
-        List<Rock> rockList = new ArrayList<>();
-        List<Grass> grassList = new ArrayList<>();
 
 
         for (int i = 0; i < 3; i++) {
@@ -59,22 +59,8 @@ public class StartSimulation {
         System.out.println(render.renderMap());
 
         for (int i = 0; i < 5; i++) {
-            System.out.println("Turn: "+(i+1));
-            for (Herbivore herbivore: herbivoreList
-            ) {
-                herbivore.setAllObstacles(treeList);
-                herbivore.setAllObstacles(rockList);
-                herbivore.findTarget(grassList);
-                herbivore.makeMove();
-                actions.herbivoreMove(herbivore);
-                if (herbivore.reproduction) {
-                    Herbivore childHerbivore = new Herbivore(2,100);
-                    childHerbivore.setCurrentCoordinates(herbivore.getTargetCoordinates());
-                    thisMap.removeEntityFromMap(herbivore.getTargetCoordinates());
-                    thisMap.addEntityToMap(childHerbivore.getCurrentCoordinates(),childHerbivore);
-                    herbivore.reproduction=false;
-                }
-            }
+            System.out.println("Turn: " + (i + 1));
+            actions.herbivoreCheck();
             herbivoreList = new ArrayList<>();
             predatorList = new ArrayList<>();
             grassList = new ArrayList<>();
@@ -98,19 +84,6 @@ public class StartSimulation {
                 if (value instanceof Tree tree) {
                     treeList.add(tree);
                 }
-
-//                    herbivore.setAllObstacles(treeList);
-//                    herbivore.setAllObstacles(rockList);
-//                    herbivore.findTarget(grassList);
-//                    herbivore.makeMove();
-//                    actions.herbivoreMove(herbivore);
-//                    if (herbivore.reproduction) {
-//                        Herbivore childHerbivore = new Herbivore(2,100);
-//                        childHerbivore.setCurrentCoordinates(herbivore.getTargetCoordinates());
-//                        thisMap.removeEntityFromMap(herbivore.getTargetCoordinates());
-//                        thisMap.addEntityToMap(childHerbivore.getCurrentCoordinates(),childHerbivore);
-//                    }
-
             }
             System.out.println(render.displayMap());
         }
@@ -136,6 +109,8 @@ public class StartSimulation {
 //        System.out.println(thisMap.getMap());
 
     }
+
+
 }
 
 
